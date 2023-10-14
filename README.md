@@ -1,16 +1,16 @@
-# news_app
+# News App
+## Assignment - MoEngage (Android Integration Engineer)
 
-NewsApp - Assignment
+### Features of the App
+**-** Developed a Flutter-based news app, leveraging an API link to fetch real-time news data.
+**-** Designed a captivating and intuitive UI, featuring beautifully crafted cards to display news articles in an engaging manner.
+**-** Implemented functionality to sort news articles based on chronological order, allowing users to view the latest or oldest news first.
+**-** Integrated a bookmark feature, enabling users to mark and save their favorite news articles for easy access and reference.
+**-** Incorporated a seamless webview feature, allowing users to read full news articles within the app without navigating to external websites.
+**-** Utilized custom design elements, fonts, and icons to enhance the app's user-friendliness and create an aesthetically pleasing experience for users.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+![IMG-20231015-WA0002](https://github.com/namanx19/NewsApp-Flutter/assets/71885262/7d659502-3215-40d1-a1c5-f6bd47d3f731)
+![IMG-20231015-WA0001](https://github.com/namanx19/NewsApp-Flutter/assets/71885262/52b9c76d-d173-4434-a6ae-88370e9951b7)
+![IMG-20231015-WA0004](https://github.com/namanx19/NewsApp-Flutter/assets/71885262/08988edb-c27f-4f8d-95c9-aec045647e3e)
+![IMG-20231015-WA0003](https://github.com/namanx19/NewsApp-Flutter/assets/71885262/4f1fd9d5-4107-4138-8999-b748306243ed)
