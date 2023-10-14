@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/constants.dart';
-import 'networking.dart';
-import 'body.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:news_app/networking.dart';
+import 'package:news_app/body.dart';
 import 'package:news_app/bookmarkscreen.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() {
   runApp(NewsAppMain());
@@ -21,7 +20,7 @@ class NewsAppMain extends StatelessWidget {
           backgroundColor: kAppBarColor,
           centerTitle: true,
           title: Text(
-              'News App - MoEngage',
+            'News App - MoEngage',
             style: kTextStyle.copyWith(
               fontSize: 18,
               color: Colors.white,
@@ -40,12 +39,27 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  bool isLoading = true;  // Track loading state
-  final String apiUrl = 'https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/staticResponse.json';
+  bool isLoading = true;
+  final String apiUrl =
+      'https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/staticResponse.json';
 
   String selectedSortOption = 'Latest to Oldest';
 
   List<NewsItem> newsItems = [];
+
+  List<NewsItem> bookmarkedNews = [];
+
+  void _handleBookmark(NewsItem newsItem) {
+    setState(() {
+      if (bookmarkedNews.contains(newsItem)) {
+        bookmarkedNews.remove(newsItem);
+      } else {
+        bookmarkedNews.add(newsItem);
+      }
+    });
+  }
+
+
 
   void _sortNews(String sortOption) {
     if (sortOption == 'Latest to Oldest') {
@@ -63,12 +77,12 @@ class _NewsScreenState extends State<NewsScreen> {
       setState(() {
         isLoading = false;
         newsItems = fetchedNews;
-        _sortNews(selectedSortOption); // Call _sortNews with the selected option
+        _sortNews(selectedSortOption);
       });
     } catch (e) {
       print('Error fetching news: $e');
       setState(() {
-        isLoading = false;  // Set loading state to false in case of an error
+        isLoading = false;
       });
     }
   }
@@ -140,7 +154,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => BookmarkedNewsScreen()),
+                    MaterialPageRoute(builder: (context) => BookmarkedNewsScreen(bookmarkedNews: bookmarkedNews)),
                   );
                 },
               ),
@@ -153,8 +167,8 @@ class _NewsScreenState extends State<NewsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SpinKitFadingGrid(
-                color: Color(0xFF2C3333), // Change the color if needed
-                size: 50.0, // Adjust size if needed
+                color: Color(0xFF2C3333),
+                size: 50.0,
               ),
               const SizedBox(
                 height: 15.0,
@@ -176,6 +190,9 @@ class _NewsScreenState extends State<NewsScreen> {
                 description: newsItems[index].description,
                 author: newsItems[index].author,
                 url: newsItems[index].url,
+                onBookmark: () {
+                  _handleBookmark(newsItems[index]);
+                },
               );
             },
           ),
@@ -184,3 +201,4 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 }
+

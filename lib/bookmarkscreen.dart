@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'package:news_app/constants.dart';
+import 'package:news_app/body.dart';
+
+import 'networking.dart';
 
 class BookmarkedNewsScreen extends StatelessWidget {
+  final List<NewsItem> bookmarkedNews;
+
+  BookmarkedNewsScreen({required this.bookmarkedNews});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +24,25 @@ class BookmarkedNewsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
+      body: bookmarkedNews.isEmpty
+          ? const Center(
         child: Text(
-          'Bookmarked News Screen Content',
+          'No current bookmarks',
           style: kTextStyle,
         ),
+      )
+          : ListView.builder(
+        itemCount: bookmarkedNews.length,
+        itemBuilder: (context, index) {
+          return NewsCard(
+            imageUrl: bookmarkedNews[index].imageUrl,
+            title: bookmarkedNews[index].title,
+            description: bookmarkedNews[index].description,
+            author: bookmarkedNews[index].author,
+            url: bookmarkedNews[index].url,
+            onBookmark: () {}, // Disable bookmarking on this screen
+          );
+        },
       ),
     );
   }
