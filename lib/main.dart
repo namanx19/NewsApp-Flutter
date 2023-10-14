@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/constants.dart';
 import 'networking.dart';
 import 'body.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(NewsAppMain());
 }
 
-class MyApp extends StatelessWidget {
+class NewsAppMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: const Color(0XFFF0F0F0),
         appBar: AppBar(
-          backgroundColor: Color(0xFF2C3333),
+          backgroundColor: const Color(0xFF2C3333),
           centerTitle: true,
-          title: Text('NewsApp'),
+          title: Text(
+              'News App - MoEngage',
+            style: kTextStyle.copyWith(
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
         ),
         body: NewsScreen(),
       ),
@@ -76,29 +84,64 @@ class _NewsScreenState extends State<NewsScreen> {
       children: [
         // Sort dropdown
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Sort'),
-              SizedBox(width: 10.0),
-              DropdownButton<String>(
-                value: selectedSortOption,
-                items: <String>['Latest to Oldest', 'Oldest to Latest']
-                    .map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  if (newValue != null) {
-                    _onChangedSortOption(newValue);
-                  }
-                },
-              ),
+          padding: const EdgeInsets.fromLTRB(16.0, 8.0, 8.0, 8.0),
+          child: Container(
+            width: 220,  // Adjust width as needed
+            height: 40,  // Adjust height as needed
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(20.0),  // Adjust border radius
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(width: 6.0,),
+                const Text('Sort:'),
+                const SizedBox(width: 10.0),
+                DropdownButton<String>(
+                  value: selectedSortOption,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 12,
+                  style: const TextStyle(color: Colors.black),
+                  underline: Container(),
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      _onChangedSortOption(newValue);
+                    }
+                  },
+                  items: <String>['Latest to Oldest', 'Oldest to Latest']
+                      .map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(value),
+                      ),
+                    );
+                  }).toList(),
+                )
 
-            ],
+                //Original Sorting Dropdown
+                // DropdownButton<String>(
+                //   value: selectedSortOption,
+                //   items: <String>['Latest to Oldest', 'Oldest to Latest']
+                //       .map((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                //   onChanged: (String? newValue) {
+                //     if (newValue != null) {
+                //       _onChangedSortOption(newValue);
+                //     }
+                //   },
+                // ),
+
+              ],
+            ),
           ),
         ),
         // News list
