@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'dart:convert'; //Used to parse the json files and extract data from it
 
 class Networking {
   final String baseUrl;
@@ -19,7 +19,7 @@ class Networking {
 
       return newsList;
     } else {
-      throw Exception('Failed to load news');
+      throw Exception('Failed to load news'); //Handled all the cases so the app doesn't crashes
     }
   }
 }
@@ -41,6 +41,8 @@ class NewsItem {
     required this.url,
   });
 
+
+  //used jsondecode to extract data from the api link and use this data across our app
   factory NewsItem.fromJson(Map<String, dynamic> json) {
     String originalUrl = json['url'];
     String secureUrl = originalUrl.replaceAll('http://', 'https://');
@@ -49,7 +51,7 @@ class NewsItem {
       title: json['title'],
       description: json['description'],
       publishedAt: DateTime.parse(json['publishedAt']),
-      author: json['author'] ?? 'Unknown',
+      author: json['author'] ?? 'Unknown', //In some news the author wasn't mentioned so used 'Unknown' so that the app doesn't crash
       url: secureUrl,
     );
   }

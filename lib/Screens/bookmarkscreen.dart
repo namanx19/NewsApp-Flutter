@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/constants.dart';
-import 'package:news_app/body.dart';
+import 'package:news_app/Utilities/constants.dart';
+import 'package:news_app/Screens/body.dart';
 
-import 'networking.dart';
+import '../Service/networking.dart';
 
 class BookmarkedNewsScreen extends StatelessWidget {
   final List<NewsItem> bookmarkedNews;

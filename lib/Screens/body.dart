@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:news_app/constants.dart';
-import 'package:news_app/webview.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-
+import 'package:news_app/Utilities/constants.dart';
+import 'package:news_app/Screens/webview.dart';
 import 'bookmarkscreen.dart';
-import 'networking.dart';
+import '../Service/networking.dart';
 
 class NewsCard extends StatefulWidget {
   final String imageUrl;
@@ -131,7 +129,6 @@ class _NewsCardState extends State<NewsCard> {
                           widget.onBookmark(); // Call the provided callback to handle bookmarking
                         },
                       ),
-
                     ],
                   ),
                 ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/constants.dart';
-import 'package:news_app/networking.dart';
-import 'package:news_app/body.dart';
-import 'package:news_app/bookmarkscreen.dart';
+import 'package:news_app/Utilities/constants.dart';
+import 'package:news_app/Service/networking.dart';
+import 'package:news_app/Screens/body.dart';
+import 'package:news_app/Screens/bookmarkscreen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() {
@@ -39,7 +39,10 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
+  // Used for enabling and disabling Spinner
   bool isLoading = true;
+
+  // API URL to fetch data
   final String apiUrl =
       'https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/staticResponse.json';
 
@@ -47,6 +50,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
   List<NewsItem> newsItems = [];
 
+  //Adding a Bookmark feature in the app
   List<NewsItem> bookmarkedNews = [];
 
   void _handleBookmark(NewsItem newsItem) {
@@ -59,8 +63,7 @@ class _NewsScreenState extends State<NewsScreen> {
     });
   }
 
-
-
+  //Sorting Functionality
   void _sortNews(String sortOption) {
     if (sortOption == 'Latest to Oldest') {
       newsItems.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
@@ -69,6 +72,7 @@ class _NewsScreenState extends State<NewsScreen> {
     }
   }
 
+  //Fetches news using the networking model.
   void fetchNews() async {
     try {
       Networking networking = Networking(apiUrl);
@@ -100,6 +104,8 @@ class _NewsScreenState extends State<NewsScreen> {
     fetchNews();
   }
 
+
+  //The UI of the main screen
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -119,6 +125,8 @@ class _NewsScreenState extends State<NewsScreen> {
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
+
+                  //Sorting Container Box
                   child: Row(
                     children: [
                       const Text('Sort:'),
@@ -149,6 +157,8 @@ class _NewsScreenState extends State<NewsScreen> {
                   ),
                 ),
               ),
+
+              //Bookmark Screen Access Icon
               IconButton(
                 icon: const Icon(Icons.bookmark),
                 onPressed: () {
@@ -164,35 +174,37 @@ class _NewsScreenState extends State<NewsScreen> {
         Expanded(
           child: isLoading
               ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SpinKitFadingGrid(
-                color: Color(0xFF2C3333),
-                size: 50.0,
-              ),
-              const SizedBox(
-                height: 15.0,
-              ),
-              Text(
-                'Getting the latest news for you!!',
-                style: kTextStyle.copyWith(
-                  fontSize: 18.0,
-                ),
-              ),
-            ],
-          )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                    const SpinKitFadingGrid(
+                      color: Color(0xFF2C3333),
+                      size: 50.0,
+                    ),
+                    const SizedBox(
+                      height: 15.0,
+                    ),
+                    Text(
+                      'Getting the latest news for you!!',
+                    style: kTextStyle.copyWith(
+                    fontSize: 18.0,
+                    ),
+                  ),
+                ],
+              )
+
+                //Used List View Builder to Create Beautiful News Cards
               : ListView.builder(
-            itemCount: newsItems.length,
-            itemBuilder: (context, index) {
-              return NewsCard(
-                imageUrl: newsItems[index].imageUrl,
-                title: newsItems[index].title,
-                description: newsItems[index].description,
-                author: newsItems[index].author,
-                url: newsItems[index].url,
-                onBookmark: () {
-                  _handleBookmark(newsItems[index]);
-                },
+                itemCount: newsItems.length,
+                itemBuilder: (context, index) {
+                return NewsCard(
+                  imageUrl: newsItems[index].imageUrl,
+                  title: newsItems[index].title,
+                  description: newsItems[index].description,
+                  author: newsItems[index].author,
+                  url: newsItems[index].url,
+                  onBookmark: () {
+                    _handleBookmark(newsItems[index]);
+                  },
               );
             },
           ),
