@@ -17,7 +17,7 @@ class NewsAppMain extends StatelessWidget {
       home: Scaffold(
         backgroundColor: const Color(0XFFF0F0F0),
         appBar: AppBar(
-          backgroundColor: const Color(0xFF2C3333),
+          backgroundColor: kAppBarColor,
           centerTitle: true,
           title: Text(
               'News App - MoEngage',
@@ -89,87 +89,92 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Sort dropdown
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: 220,  // Adjust width as needed
-            height: 40,  // Adjust height as needed
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(20.0),  // Adjust border radius
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(width: 6.0,),
-                const Text('Sort:'),
-                const SizedBox(width: 10.0),
-                DropdownButton<String>(
-                  value: selectedSortOption,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  iconSize: 24,
-                  elevation: 12,
-                  style: const TextStyle(color: Colors.black),
-                  underline: Container(),
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      _onChangedSortOption(newValue);
-                    }
-                  },
-                  items: <String>['Latest to Oldest', 'Oldest to Latest']
-                      .map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(value),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: 220,
+                  height: 40,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  child: Row(
+                    children: [
+                      const Text('Sort:'),
+                      DropdownButton<String>(
+                        value: selectedSortOption,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        iconSize: 24,
+                        elevation: 12,
+                        style: const TextStyle(color: Colors.black),
+                        underline: Container(),
+                        onChanged: (String? newValue) {
+                          if (newValue != null) {
+                            _onChangedSortOption(newValue);
+                          }
+                        },
+                        items: <String>['Latest to Oldest', 'Oldest to Latest']
+                            .map((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(value),
+                            ),
+                          );
+                        }).toList(),
                       ),
-                    );
-                  }).toList(),
-                )
-              ],
-            ),
+                    ],
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.bookmark),
+                onPressed: () {},
+              ),
+            ],
           ),
         ),
-        // News list
-        // Loading indicator and text
-        isLoading
-            ? Center(
-              child: Column(
-                children: [
-                  const SizedBox(height: 20.0),
-                  const SpinKitFadingFour(
-                    color: const Color(0xFF2C3333),  // Adjust color as needed
-                    size: 70.0,  // Adjust size as needed
-                  ),
-                  const SizedBox(height: 10.0),
-                  Text(
-                    'Getting the latest news for you',
-                    style: kTextStyle.copyWith(
-                      fontSize: 16.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
+        Expanded(
+          child: isLoading
+              ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SpinKitFadingGrid(
+                color: Color(0xFF2C3333), // Change the color if needed
+                size: 50.0, // Adjust size if needed
               ),
-            )
-            : Expanded(
-              child: ListView.builder(
-                itemCount: newsItems.length,
-                itemBuilder: (context, index) {
-                  return NewsCard(
-                    imageUrl: newsItems[index].imageUrl,
-                    title: newsItems[index].title,
-                    description: newsItems[index].description,
-                    author: newsItems[index].author,
-                    url: newsItems[index].url,
-                  );
-                },
+              const SizedBox(
+                height: 15.0,
               ),
+              Text(
+                'Getting the latest news for you!!',
+                style: kTextStyle.copyWith(
+                  fontSize: 18.0,
+                ),
+              ),
+            ],
+          )
+              : ListView.builder(
+            itemCount: newsItems.length,
+            itemBuilder: (context, index) {
+              return NewsCard(
+                imageUrl: newsItems[index].imageUrl,
+                title: newsItems[index].title,
+                description: newsItems[index].description,
+                author: newsItems[index].author,
+                url: newsItems[index].url,
+              );
+            },
+          ),
         ),
-        ],
-      );
-    }
+      ],
+    );
+  }
 }
