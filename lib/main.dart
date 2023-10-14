@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app/constants.dart';
 import 'networking.dart';
 import 'body.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 
 void main() {
   runApp(NewsAppMain());
@@ -37,6 +39,7 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
+  bool isLoading = true;  // Track loading state
   final String apiUrl = 'https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/staticResponse.json';
 
   String selectedSortOption = 'Latest to Oldest';
@@ -57,11 +60,15 @@ class _NewsScreenState extends State<NewsScreen> {
       List<NewsItem> fetchedNews = await networking.getNews();
 
       setState(() {
+        isLoading = false;
         newsItems = fetchedNews;
         _sortNews(selectedSortOption); // Call _sortNews with the selected option
       });
     } catch (e) {
       print('Error fetching news: $e');
+      setState(() {
+        isLoading = false;  // Set loading state to false in case of an error
+      });
     }
   }
 
@@ -84,7 +91,7 @@ class _NewsScreenState extends State<NewsScreen> {
       children: [
         // Sort dropdown
         Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 8.0, 8.0, 8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Container(
             width: 220,  // Adjust width as needed
             height: 40,  // Adjust height as needed
@@ -145,19 +152,40 @@ class _NewsScreenState extends State<NewsScreen> {
           ),
         ),
         // News list
-        Expanded(
-          child: ListView.builder(
-            itemCount: newsItems.length,
-            itemBuilder: (context, index) {
-              return NewsCard(
-                imageUrl: newsItems[index].imageUrl,
-                title: newsItems[index].title,
-                description: newsItems[index].description,
-              );
-            },
+        // Loading indicator and text
+        isLoading
+            ? Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20.0),
+                  const SpinKitFadingFour(
+                    color: const Color(0xFF2C3333),  // Adjust color as needed
+                    size: 70.0,  // Adjust size as needed
+                  ),
+                  const SizedBox(height: 10.0),
+                  Text(
+                    'Getting the latest news for you',
+                    style: kTextStyle.copyWith(
+                      fontSize: 16.0,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            )
+            : Expanded(
+              child: ListView.builder(
+                itemCount: newsItems.length,
+                itemBuilder: (context, index) {
+                  return NewsCard(
+                    imageUrl: newsItems[index].imageUrl,
+                    title: newsItems[index].title,
+                    description: newsItems[index].description,
+                  );
+              },
+            ),
           ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
+    }
 }
