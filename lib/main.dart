@@ -3,7 +3,7 @@ import 'package:news_app/constants.dart';
 import 'networking.dart';
 import 'body.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:news_app/bookmarked_news_screen.dart';
+import 'package:news_app/bookmarkscreen.dart';
 
 
 void main() {
