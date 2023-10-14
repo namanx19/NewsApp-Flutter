@@ -129,24 +129,6 @@ class _NewsScreenState extends State<NewsScreen> {
                     );
                   }).toList(),
                 )
-
-                //Original Sorting Dropdown
-                // DropdownButton<String>(
-                //   value: selectedSortOption,
-                //   items: <String>['Latest to Oldest', 'Oldest to Latest']
-                //       .map((String value) {
-                //     return DropdownMenuItem<String>(
-                //       value: value,
-                //       child: Text(value),
-                //     );
-                //   }).toList(),
-                //   onChanged: (String? newValue) {
-                //     if (newValue != null) {
-                //       _onChangedSortOption(newValue);
-                //     }
-                //   },
-                // ),
-
               ],
             ),
           ),
@@ -181,6 +163,7 @@ class _NewsScreenState extends State<NewsScreen> {
                     imageUrl: newsItems[index].imageUrl,
                     title: newsItems[index].title,
                     description: newsItems[index].description,
+                    author: newsItems[index].author,
                   );
               },
             ),

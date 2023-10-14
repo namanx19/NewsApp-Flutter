@@ -29,12 +29,16 @@ class NewsItem {
   final String title;
   final String description;
   final DateTime publishedAt;
+  final String author;
+  //final String author;
 
   NewsItem({
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.publishedAt,
+    required this.author,
+    //required this.author,
   });
 
   factory NewsItem.fromJson(Map<String, dynamic> json) {
@@ -43,6 +47,8 @@ class NewsItem {
       title: json['title'],
       description: json['description'],
       publishedAt: DateTime.parse(json['publishedAt']),
+      author: json['author'] ?? 'Unknown',
+      //author: json['author'],
     );
   }
 }

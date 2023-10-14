@@ -5,18 +5,21 @@ class NewsCard extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
+  final String author;
+  //final String author;
 
   NewsCard({
     required this.imageUrl,
     required this.title,
     required this.description,
+    required this.author,
+    //required this.author,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
-      //color: const Color(0XFFEEEEEE),  //CARD COLOR
+      color: Colors.white, // Card color
       elevation: 30.0,
       margin: const EdgeInsets.all(16.0),
       child: Padding(
@@ -38,7 +41,7 @@ class NewsCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16.0), // Add some spacing between image and text
-            // Title and Description
+            // Title, Author, and Description
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,12 +52,13 @@ class NewsCard extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  // const SizedBox(height: 8.0),
-                  // Text(
-                  //   description,
-                  //   maxLines: 2,
-                  //   overflow: TextOverflow.ellipsis,
-                  // ),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    'Author: $author',  // Display author
+                    style: kTextStyle.copyWith(
+                      fontSize: 10.0,
+                    ),
+                  ),
                   const SizedBox(height: 16.0),
                   Row(
                     children: [
@@ -63,15 +67,11 @@ class NewsCard extends StatelessWidget {
                           print('Tapped');
                         },
                         child: Text(
-                            'Full Article',
+                          'Full Article',
                           style: kTextStyle.copyWith(
-                            color: Colors.blue,
-                            fontSize: 12.0
+                              color: Colors.blue,
+                              fontSize: 12.0
                           ),
-                          // style: TextStyle(
-                          //   color: Colors.blue,
-                          //   fontWeight: FontWeight.bold
-                          // ),
                         ),
                       ),
                       const SizedBox(
@@ -84,12 +84,6 @@ class NewsCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // TextButton(
-                  //   onPressed: () {
-                  //     // Implement action when the button is tapped
-                  //   },
-                  //   child: const Text('Read full article'),
-                  // ),
                 ],
               ),
             ),
@@ -99,4 +93,3 @@ class NewsCard extends StatelessWidget {
     );
   }
 }
-
