@@ -10,7 +10,7 @@
 **-** Utilized custom design elements, fonts, and icons to enhance the app's user-friendliness and create an aesthetically pleasing experience for users.
 
 ## Screenshots
-<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/7d659502-3215-40d1-a1c5-f6bd47d3f731" width = 50% height = 50% />
-<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/52b9c76d-d173-4434-a6ae-88370e9951b7" width = 50% height = 50% />
-<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/08988edb-c27f-4f8d-95c9-aec045647e3e" width = 50% height = 50% />
-<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/4f1fd9d5-4107-4138-8999-b748306243ed" width = 50% height = 50% />
+<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/7d659502-3215-40d1-a1c5-f6bd47d3f731" width = 20% height = 20% />
+<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/52b9c76d-d173-4434-a6ae-88370e9951b7" width = 20% height = 20% />
+<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/08988edb-c27f-4f8d-95c9-aec045647e3e" width = 20% height = 20% />
+<img src="https://github.com/namanx19/NewsApp-Flutter/assets/71885262/4f1fd9d5-4107-4138-8999-b748306243ed" width = 20% height = 20% />
