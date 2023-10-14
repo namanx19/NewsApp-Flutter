@@ -3,6 +3,7 @@ import 'package:news_app/constants.dart';
 import 'networking.dart';
 import 'body.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:news_app/bookmarked_news_screen.dart';
 
 
 void main() {
@@ -136,7 +137,12 @@ class _NewsScreenState extends State<NewsScreen> {
               ),
               IconButton(
                 icon: const Icon(Icons.bookmark),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BookmarkedNewsScreen()),
+                  );
+                },
               ),
             ],
           ),
