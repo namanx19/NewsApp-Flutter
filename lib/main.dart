@@ -164,10 +164,11 @@ class _NewsScreenState extends State<NewsScreen> {
                     title: newsItems[index].title,
                     description: newsItems[index].description,
                     author: newsItems[index].author,
+                    url: newsItems[index].url,
                   );
-              },
-            ),
-          ),
+                },
+              ),
+        ),
         ],
       );
     }

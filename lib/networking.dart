@@ -30,7 +30,7 @@ class NewsItem {
   final String description;
   final DateTime publishedAt;
   final String author;
-  //final String author;
+  final String url;
 
   NewsItem({
     required this.imageUrl,
@@ -38,17 +38,19 @@ class NewsItem {
     required this.description,
     required this.publishedAt,
     required this.author,
-    //required this.author,
+    required this.url,
   });
 
   factory NewsItem.fromJson(Map<String, dynamic> json) {
+    String originalUrl = json['url'];
+    String secureUrl = originalUrl.replaceAll('http://', 'https://');
     return NewsItem(
       imageUrl: json['urlToImage'],
       title: json['title'],
       description: json['description'],
       publishedAt: DateTime.parse(json['publishedAt']),
       author: json['author'] ?? 'Unknown',
-      //author: json['author'],
+      url: secureUrl,
     );
   }
 }

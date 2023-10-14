@@ -1,20 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/constants.dart';
+import 'package:news_app/webview.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class NewsCard extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
   final String author;
-  //final String author;
+  final String url;
 
   NewsCard({
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.author,
-    //required this.author,
+    required this.url,
   });
+
+  void _openWebView(BuildContext context, String url) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => WebViewPage(url: url),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +74,14 @@ class NewsCard extends StatelessWidget {
                   Row(
                     children: [
                       GestureDetector(
-                        onTap: (){
-                          print('Tapped');
+                        onTap: () {
+                          _openWebView(context, url);
                         },
                         child: Text(
                           'Full Article',
                           style: kTextStyle.copyWith(
-                              color: Colors.blue,
-                              fontSize: 12.0
+                            color: Colors.blue,
+                            fontSize: 12.0,
                           ),
                         ),
                       ),
